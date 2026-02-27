@@ -1,7 +1,7 @@
 # Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 env:
-  PUBLISH_DIR: bin/Release/net9.0/publish
+  PUBLISH_DIR: bin/Release/net10.0/publish
 
 on:
   # Runs on pushes targeting the default branch for the app's folder path
@@ -43,7 +43,7 @@ jobs:
           dotnet-version: '10.0'
 
       - name: Publish app
-        run: dotnet publish AINovelistViewer.csproj -c Release -o ${{ env.PUBLISH_DIR }}
+        run: dotnet publish doaxvv_calendar.csproj -c Release -o ${{ env.PUBLISH_DIR }}
 
       - name: Rewrite base href
         uses: SteveSandersonMS/ghaction-rewrite-base-href@5b54862a8831e012d4f1a8b2660894415fdde8ec # v1.1.0
