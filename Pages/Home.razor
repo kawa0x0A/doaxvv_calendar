@@ -22,12 +22,12 @@
 
             @if (daysLeft == 0)
             {
-                <span class="text-success fw-bold">本日は @nextBirthdayCharacter のお誕生日です！🎉</span>
+                <span class="text-success fw-bold">本日は @nextBirthdayCharacter.Name の @nextBirthdayCharacter.Title です！🎉</span>
             }
             else
             {
                 <strong>
-                    @nextBirthdayCharacter.Name のお誕生日まで @daysLeft 日 ( @nextBirthdayDate.Value.ToString("M月d日") )
+                    @nextBirthdayCharacter.Name の @nextBirthdayCharacter.Title まで @daysLeft 日 ( @nextBirthdayDate.Value.ToString("M月d日") )
                 </strong>
             }
 
@@ -107,7 +107,7 @@
                                              style="width:40px;height:40px;object-fit:cover" />
 
                                         <div class="small text-success fw-semibold px-1">
-                                            @($"{character.Name}のお誕生日")
+                                            @($"{character.Name}の{character.Title}")
                                         </div>
                                     }
                                 </div>
@@ -143,45 +143,47 @@
     private class Character
     {
         public string Name { get; init; } = "";
-        public (int Month, int Day)? Birthday { get; init; }  // null = 不明
+        public string Title { get; init; } = "";
+        public (int Month, int Day)? Days { get; init; }  // null = 不明
         public string ImageUrl { get; init; } = "";
     }
 
     private readonly Character[] characters = new[]
     {
-        new Character() { Name = "みさき", Birthday = (7, 7), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c00.jpg" },
-        new Character() { Name = "マリー・ローズ", Birthday = (6, 6), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c01.jpg" },
-        new Character() { Name = "ほのか", Birthday = (3, 24), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c02.jpg" },
-        new Character() { Name = "かすみ", Birthday = (2, 23), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c03.jpg" },
-        new Character() { Name = "あやね", Birthday = (8, 5), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c04.jpg" },
-        new Character() { Name = "こころ", Birthday = (12, 1), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c05.jpg" },
-        new Character() { Name = "女天狗", Birthday = null, ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c06.jpg" },
-        new Character() { Name = "ヒトミ", Birthday = (5, 25), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c07.jpg" },
-        new Character() { Name = "紅葉", Birthday = (9, 20), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c08.jpg" },
-        new Character() { Name = "エレナ", Birthday = (1, 30), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c09.jpg" },
-        new Character() { Name = "ルナ", Birthday = (10, 15), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c10.jpg" },
-        new Character() { Name = "たまき", Birthday = (8, 19), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c11.jpg" },
-        new Character() { Name = "レイファン", Birthday = (4, 23), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c12.jpg" },
-        new Character() { Name = "フィオナ", Birthday = (2, 11), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c13.jpg" },
-        new Character() { Name = "なぎさ", Birthday = (5, 5), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c14.jpg" },
-        new Character() { Name = "カンナ", Birthday = null, ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c15.jpg" },
-        new Character() { Name = "モニカ", Birthday = (1, 1), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c16.jpg" },
-        new Character() { Name = "さゆり", Birthday = (3, 31), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c17.jpg" },
-        new Character() { Name = "パティ", Birthday = (7, 31), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c18.jpg" },
-        new Character() { Name = "つくし", Birthday = (10, 24), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c19.jpg" },
-        new Character() { Name = "ロベリア", Birthday = (6, 25), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c20.jpg" },
-        new Character() { Name = "ななみ", Birthday = (4, 16), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c21.jpg" },
-        new Character() { Name = "エリーゼ", Birthday = (9, 3), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c22.jpg" },
-        new Character() { Name = "こはる", Birthday = (12, 22), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c23.jpg" },
-        new Character() { Name = "ティナ", Birthday = (12, 6), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c24.jpg" },
-        new Character() { Name = "エイミー", Birthday = (6, 18), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c25.jpg" },
-        new Character() { Name = "シャンディ", Birthday = (3, 3), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c26.jpg" },
-        new Character() { Name = "ゆきの", Birthday = (1, 20), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c27.jpg" },
-        new Character() { Name = "しずく", Birthday = (5, 18), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c2843417.jpg" },
-        new Character() { Name = "れいか", Birthday = (7, 21), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c2983795.jpg" },
-        new Character() { Name = "メグ", Birthday = (2, 4), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c3024051.jpg" },
-        new Character() { Name = "あずさ", Birthday = (8, 12), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c3154457.jpg" },
-        new Character() { Name = "のぞみ", Birthday = (9, 30), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c3295188.jpg" },
+        new Character() { Name = "みさき", Title = "お誕生日", Days = (7, 7), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c00.jpg" },
+        new Character() { Name = "マリー・ローズ", Title = "お誕生日", Days = (6, 6), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c01.jpg" },
+        new Character() { Name = "ほのか", Title = "お誕生日", Days = (3, 24), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c02.jpg" },
+        new Character() { Name = "かすみ", Title = "お誕生日", Days = (2, 23), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c03.jpg" },
+        new Character() { Name = "あやね", Title = "お誕生日", Days = (8, 5), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c04.jpg" },
+        new Character() { Name = "こころ", Title = "お誕生日", Days = (12, 1), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c05.jpg" },
+        new Character() { Name = "女天狗", Title = "お誕生日", Days = null, ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c06.jpg" },
+        new Character() { Name = "ヒトミ", Title = "お誕生日", Days = (5, 25), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c07.jpg" },
+        new Character() { Name = "紅葉", Title = "お誕生日", Days = (9, 20), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c08.jpg" },
+        new Character() { Name = "エレナ", Title = "お誕生日", Days = (1, 30), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c09.jpg" },
+        new Character() { Name = "ルナ", Title = "お誕生日", Days = (10, 15), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c10.jpg" },
+        new Character() { Name = "たまき", Title = "お誕生日", Days = (8, 19), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c11.jpg" },
+        new Character() { Name = "レイファン", Title = "お誕生日", Days = (4, 23), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c12.jpg" },
+        new Character() { Name = "フィオナ", Title = "お誕生日", Days = (2, 11), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c13.jpg" },
+        new Character() { Name = "なぎさ", Title = "お誕生日", Days = (5, 5), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c14.jpg" },
+        new Character() { Name = "カンナ", Title = "お誕生日", Days = null, ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c15.jpg" },
+        new Character() { Name = "モニカ", Title = "お誕生日", Days = (1, 1), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c16.jpg" },
+        new Character() { Name = "さゆり", Title = "お誕生日", Days = (3, 31), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c17.jpg" },
+        new Character() { Name = "パティ", Title = "お誕生日", Days = (7, 31), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c18.jpg" },
+        new Character() { Name = "つくし", Title = "お誕生日", Days = (10, 24), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c19.jpg" },
+        new Character() { Name = "ロベリア", Title = "お誕生日", Days = (6, 25), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c20.jpg" },
+        new Character() { Name = "ななみ", Title = "お誕生日", Days = (4, 16), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c21.jpg" },
+        new Character() { Name = "エリーゼ", Title = "お誕生日", Days = (9, 3), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c22.jpg" },
+        new Character() { Name = "こはる", Title = "お誕生日", Days = (12, 22), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c23.jpg" },
+        new Character() { Name = "ティナ", Title = "お誕生日", Days = (12, 6), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c24.jpg" },
+        new Character() { Name = "エイミー", Title = "お誕生日", Days = (6, 18), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c25.jpg" },
+        new Character() { Name = "シャンディ", Title = "お誕生日", Days = (3, 3), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c26.jpg" },
+        new Character() { Name = "ゆきの", Title = "お誕生日", Days = (1, 20), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c27.jpg" },
+        new Character() { Name = "しずく", Title = "お誕生日", Days = (5, 18), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c2843417.jpg" },
+        new Character() { Name = "れいか", Title = "お誕生日", Days = (7, 21), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c2983795.jpg" },
+        new Character() { Name = "メグ", Title = "お誕生日", Days = (2, 4), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c3024051.jpg" },
+        new Character() { Name = "あずさ", Title = "お誕生日", Days = (8, 12), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c3154457.jpg" },
+        new Character() { Name = "のぞみ", Title = "お誕生日", Days = (9, 30), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c3295188.jpg" },
+        new Character() { Name = "女天狗", Title = "特別な日", Days = (11, 19), ImageUrl = "https://doax-venusvacation.jp/wp-content/themes/doax-venusvacation/img/character/icon_c06.jpg" },
     };
 
     private readonly string[] DayNames = new[] { "日", "月", "火", "水", "木", "金", "土" };
@@ -229,13 +231,13 @@
     {
         return characters?
             .FirstOrDefault(c =>
-                c.Birthday != null &&
-                c.Birthday.Value.Month == day.Month &&
-                c.Birthday.Value.Day == day.Day);
+                c.Days != null &&
+                c.Days.Value.Month == day.Month &&
+                c.Days.Value.Day == day.Day);
     }
 
     private IEnumerable<Character> UnknownCharacters =>
-        characters?.Where(c => c.Birthday == null)
+        characters?.Where(c => c.Days == null)
         ?? Enumerable.Empty<Character>();
 
     // ===== 7列カレンダー生成ロジック =====
@@ -287,13 +289,13 @@
         var today = DateTime.Today;
 
         var result = characters
-            .Where(c => c.Birthday != null)
+            .Where(c => c.Days != null)
             .Select(c =>
             {
                 var nextDate = new DateTime(
                     today.Year,
-                    c.Birthday!.Value.Month,
-                    c.Birthday.Value.Day);
+                    c.Days!.Value.Month,
+                    c.Days.Value.Day);
 
                 if (nextDate < today)
                     nextDate = nextDate.AddYears(1);
